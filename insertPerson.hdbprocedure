@@ -1,0 +1,28 @@
+PROCEDURE "PAGOTI"."br.com.hanabrasil.FileUploaderToHanaDB::insertPerson" ( 
+	in in_first_name NVARCHAR(30),
+	in in_last_name NVARCHAR(30),
+	in in_bio NCLOB,
+	in in_born_date DATE,
+	in in_dependents INTEGER
+) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA "PAGOTI"
+	AS -- "READS SQL DATA " removed  
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+insert into
+	"PAGOTI"."br.com.hanabrasil.FileUploaderToHanaDB::people_management.PEOPLE" 
+	values 
+		(
+			((select max(id) from "PAGOTI"."br.com.hanabrasil.FileUploaderToHanaDB::people_management.PEOPLE") + 1), 
+			in_first_name,
+			in_last_name,
+			in_bio,
+			in_born_date,
+			in_dependents
+		);
+		
+END;

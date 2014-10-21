@@ -1,0 +1,16 @@
+namespace br.com.hanabrasil.FileUploaderToHanaDB;
+
+@Schema: 'PAGOTI'
+context people_management {
+ 
+ @Catalog.tableType: #COLUMN
+ entity PEOPLE{
+ 	key id: Integer64;
+ 	first_name: String(30);
+ 	last_name: type of PEOPLE.first_name;
+ 	bio: LargeString;
+ 	born_date: LocalDate;
+ 	dependents: Integer;
+ };
+ 
+};
